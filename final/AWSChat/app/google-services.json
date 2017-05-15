@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "332977463957",
+    "project_id": "firebase-awschat"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332977463957:android:b1ab9db9ab906106",
+        "android_client_info": {
+          "package_name": "asmtechnology.com.awschat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332977463957-5t8ub83otg67o36urs24liupfqu3ouvo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "asmtechnology.com.awschat",
+            "certificate_hash": "fcae0e4964516c54501171b17765334453da54fd"
+          }
+        },
+        {
+          "client_id": "332977463957-i3lf03m5e16ai1obc9tfru36vuu887ln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB1eA76u7cqkRj4a9UkrycCGfObWxPLY8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
