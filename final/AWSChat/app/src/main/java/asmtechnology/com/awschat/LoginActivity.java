@@ -1,5 +1,6 @@
 package asmtechnology.com.awschat;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -42,6 +45,7 @@ import asmtechnology.com.awschat.controllers.CognitoUserPoolController;
 import asmtechnology.com.awschat.interfaces.CognitoIdentityPoolControllerGenericHandler;
 import asmtechnology.com.awschat.interfaces.CognitoUserPoolControllerGenericHandler;
 import asmtechnology.com.awschat.interfaces.CognitoUserPoolControllerUserDetailsHandler;
+import asmtechnology.com.awschat.services.RegistrationIntentService;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -55,7 +59,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleSignInOptions mGoogleSignInOptions;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton mGoogleSignInButton;
+
     private int GOOGLE_SIGNIN_RESULT_CODE = 100;
+    private int GOOGLE_PLAY_SERVICES_REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +93,34 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         configureLoginWithFacebook();
         configureGoogleSignIn();
+
+        if (checkPlayServices()) {
+            // Start service to register this application with GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+
     }
+
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == GOOGLE_SIGNIN_RESULT_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleGoogleSignInResult(result);
-        } else {
+
+        } else  if (requestCode == GOOGLE_PLAY_SERVICES_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                // Start IntentService to register this application with GCM.
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+        }
+        else {
             mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -383,7 +409,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
-
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, GOOGLE_PLAY_SERVICES_REQUEST_CODE)
+                        .show();
+            } else {
+                Log.e("AWSCHAT", "This device does not support GCM notifications.");
+            }
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public void onConnectionFailed(final ConnectionResult connectionResult) {
