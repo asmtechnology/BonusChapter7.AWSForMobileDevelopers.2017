@@ -36,7 +36,7 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.4.1'
     compile 'com.amazonaws:aws-android-sdk-cognito:2.4.1'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
-    compile 'com.google.android.gms:play-services-auth:9.0.0'
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile 'com.amazonaws:aws-android-sdk-ddb:2.4.1'
     compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.4.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -44,7 +44,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.amazonaws:aws-android-sdk-sns:2.4.1'
-    compile 'com.google.android.gms:play-services-gcm:9.0.0'
+    compile 'com.google.android.gms:play-services-gcm:10.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
