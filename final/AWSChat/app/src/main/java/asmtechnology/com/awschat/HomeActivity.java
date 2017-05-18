@@ -13,14 +13,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import asmtechnology.com.awschat.controllers.ChatManager;
 import asmtechnology.com.awschat.controllers.CognitoIdentityPoolController;
 import asmtechnology.com.awschat.controllers.DynamoDBController;
+import asmtechnology.com.awschat.controllers.SNSController;
 import asmtechnology.com.awschat.interfaces.DynamoDBControllerGenericHandler;
 import asmtechnology.com.awschat.interfaces.RecyclerViewHolderListener;
+import asmtechnology.com.awschat.interfaces.SNSControllerGenericHandler;
 import asmtechnology.com.awschat.models.User;
 import asmtechnology.com.awschat.recyclerview.FriendListAdapter;
 
@@ -53,6 +56,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewHolde
 
         refreshFriendList();
         checkPermissions();
+        registerPushToken();
     }
 
     protected void onResume() {
@@ -177,6 +181,21 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewHolde
         } else {
             mWriteExternalStoragePermissionGranted = true;
         }
+    }
+
+    private void registerPushToken() {
+        SNSController snsController = SNSController.getInstance(this);
+        snsController.registerToken(new SNSControllerGenericHandler() {
+            @Override
+            public void didSucceed() {
+                Log.d("AWSCHAT", "Succesfully saved GCM token to Amazon SNS");
+            }
+
+            @Override
+            public void didFail(Exception exception) {
+                Log.d("AWSCHAT", "Unable to save GCM token to SNS" + exception.getMessage());
+            }
+        });
     }
 
     @Override
