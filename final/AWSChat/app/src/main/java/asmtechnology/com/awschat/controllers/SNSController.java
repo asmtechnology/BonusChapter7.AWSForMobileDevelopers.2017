@@ -21,8 +21,9 @@ public class SNSController {
 
     public String gcmDeviceToken = null;
 
+    //TO DO: Insert your SNS platform application settings here
     private Regions snsRegion = Regions.US_EAST_1;
-    private String platformApplicationARN = "arn:aws:sns:us-east-1:700128248927:app/GCM/AWSChat_Android";
+    private String platformApplicationARN = "your SNS platform application ARN";
 
     private Context mContext;
 

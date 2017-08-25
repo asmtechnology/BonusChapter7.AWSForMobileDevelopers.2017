@@ -51,7 +51,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private LoginButton mFacebookLoginButton;
     private CallbackManager mFacebookCallbackManager;
 
-    private String mGoogleClientId = "332977463957-i3lf03m5e16ai1obc9tfru36vuu887ln.apps.googleusercontent.com";
+    //TO DO: Insert your Google client id here
+    private String mGoogleClientId = "your google client id";
+
     private GoogleSignInOptions mGoogleSignInOptions;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton mGoogleSignInButton;

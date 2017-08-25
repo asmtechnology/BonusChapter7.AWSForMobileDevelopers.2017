@@ -26,10 +26,14 @@ import asmtechnology.com.awschat.interfaces.CognitoUserPoolControllerUserDetails
 
 public class CognitoUserPoolController {
 
-    private String userPoolRegion = "us-east-1";
-    private String userPoolID = "us-east-1_qEyg0l636";
-    private String appClientID = "5o6ge7468o0iuaso9ego20e2s5";
-    private String appClientSecret = "ou0po8kqd8v9pjsthprac2r5msuq2b5otoi2dbbk1cjcl4nspl1";
+    //TO DO: Insert your Cognito user pool settings here
+    private String userPoolRegion = "your user pool region";
+    private String userPoolID = "your user pool id";
+
+    //TO DO: Insert the client id and client secret for the App you created
+    // within the Cognito user pool.
+    private String appClientID = "your app client id";
+    private String appClientSecret = "your app client secret";
 
     private CognitoUserPool userPool;
     private Context mContext;

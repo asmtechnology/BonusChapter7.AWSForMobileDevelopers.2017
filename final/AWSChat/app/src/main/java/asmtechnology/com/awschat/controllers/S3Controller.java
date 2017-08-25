@@ -18,9 +18,10 @@ import asmtechnology.com.awschat.interfaces.S3ControllerGenericHandler;
 
 public class S3Controller {
 
+    //TO DO: Insert your S3 bucket settings here
     private Regions bucketRegion = Regions.US_EAST_1;
-    private String imageBucketName = "com.asmtechnology.awschat.images";
-    private String thumbnailsBucketName = "com.asmtechnology.awschat.thumbnails";
+    private String imageBucketName = "your s3 image bucket";
+    private String thumbnailsBucketName = "your s3 thumbnail bucket";
 
     private Context mContext;
 

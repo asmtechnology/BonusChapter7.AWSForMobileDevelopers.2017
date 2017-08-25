@@ -21,7 +21,8 @@ import asmtechnology.com.awschat.interfaces.CognitoIdentityPoolControllerGeneric
 
 public class CognitoIdentityPoolController {
 
-    private String identityPoolID = "us-east-1:3a7a90d7-b0e7-4730-b0aa-866c9a16ec85";
+    //TO DO: Insert your Cognito identity pool settings here
+    private String identityPoolID = "your identity pool id";
     private Regions identityPoolRegion = Regions.US_EAST_1;
 
     public CognitoCachingCredentialsProvider mCredentialsProvider;
